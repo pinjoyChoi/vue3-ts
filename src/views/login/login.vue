@@ -1,6 +1,6 @@
 <template>
   <div>
-    login
+    <a-button>按钮</a-button>
   </div>
 </template>
 

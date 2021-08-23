@@ -6,7 +6,7 @@ module.exports={
   // 静态资源得目录
   assetsDir:"assets",
   // eslint-loader 是否在保存的时候检查
-  lintOnSave: false,
+  lintOnSave: true,
   // 生产环境下的sourcemap  方便调试错误  会报哪里错误
   productionSourceMap:true,
   // webpack配置 config
@@ -14,16 +14,10 @@ module.exports={
   // chainWebpack:()=>{},
   // css相关配置
   css:{
-      // 启动 css modulels
-      requireModuleExtension:true,     //  module  被废弃
-      // 是否使用css分离插件
-      extract:true,
-      // 开启css Source maps?
-      sourceMap:false,
       // css预设器配置项
       loaderOptions:{
-          sass:{                     //配置sass  如果你需要sass的话  
-            
+          scss:{                     //配置sass  如果你需要sass的话  
+            prependData: `@import "./src/styles/main.scss";`
           }
       },
   },
