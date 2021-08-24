@@ -42,7 +42,7 @@ interface FormState {
   password: string;
 }
 export default defineComponent({
-  name: 'login',
+  name: 'Login',
   setup() {
     const formState = reactive<FormState>({
       user: '',
