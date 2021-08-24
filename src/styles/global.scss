@@ -117,3 +117,14 @@
 @for $i from 0 through 30 {
   @include margin-padding($i)
 }
+
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// TODO：后续添加主题更换
+.fc-primary {
+  color: #1890ff !important;
+}
