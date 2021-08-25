@@ -1,3 +1,8 @@
+// TODO：后续添加主题更换
+.fc-primary {
+  color: #1890ff !important;
+}
+
 .flex {
   display: flex;
 }
@@ -124,7 +129,8 @@
   white-space: nowrap;
 }
 
-// TODO：后续添加主题更换
-.fc-primary {
-  color: #1890ff !important;
+@for $i from 12 through 30 {
+  .fs-#{$i} {
+    font-size: $i+px !important;
+  }
 }

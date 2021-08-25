@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="aside">
     <div class="logo flex-center">
       <img class="height-full" :src="logo" alt="logo">
     </div>
@@ -15,7 +15,10 @@
         <template v-if="!item.meta.hidden">
           <!-- 单级菜单 -->
           <a-menu-item v-if="!item.children" :key="item.path">
-            <router-link :to="item.path">{{ item.meta?.title }}</router-link>
+            <router-link :to="item.path">
+              <i class="fa fa-fw fa-lg" :class="item.meta?.icon" />
+              {{ item.meta?.title }}
+            </router-link>
           </a-menu-item>
           <!-- 多级菜单 -->
           <AsideItem v-else :item="item" :key="item.path" />
@@ -35,8 +38,8 @@ export default defineComponent({
   name: 'Aside',
   components: { AsideItem },
   setup() {
-    const { options } = useRouter();
-    const routers = options.routes.find(x => x.name === 'index')?.children;
+    const { getRoutes } = useRouter();
+    const routers = getRoutes().find(x => x.name === 'index')?.children;
 
     const state = reactive({
       selectedKeys: JSON.parse(localStorage.getItem('selectedKeys') as string),

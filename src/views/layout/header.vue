@@ -9,15 +9,20 @@
         <template #overlay>
           <a-menu style="width: 150px">
             <a-menu-item key="0">
-              <div class="flex">
+              <div class="flex-center">
+                <i class="fa fa-fw fa-user-circle" />
+                <a-divider type="vertical" />
                 <span>{{$t('headers_menu.account')}}：</span>
                 <span class="flex-1 text-ellipsis">admin</span>
               </div>
             </a-menu-item>
             <a-menu-divider />
             <a-menu-item key="1">
-              <div class="flex-between plr-8">
+              <div class="flex-center">
+                <i class="fa fa-fw fa-font flex-center" />
+                <a-divider type="vertical" />
                 <span
+                  class="flex-1"
                   v-for="item in langs"
                   :key="item.value"
                   :value="item.value"

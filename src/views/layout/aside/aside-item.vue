@@ -1,6 +1,9 @@
 <template>
   <a-sub-menu>
-    <template #title>{{ item.meta?.title }}</template>
+    <template #title>
+      <i class="fa fa-fw fa-lg" :class="item.meta?.icon" />
+      {{ item.meta?.title }}
+    </template>
     <template v-if="item.children.length">
       <template v-for="childrenItem in item.children">
         <!-- 不存在自己子路由 -->
@@ -21,4 +24,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

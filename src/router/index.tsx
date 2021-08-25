@@ -17,19 +17,19 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '/overview',
         name: 'overview',
-        meta: { title: '首页', icon: '111' },
+        meta: { title: '首页', icon: 'fa-home' },
         component: () => import('@/views/overview/overview.vue')
       },
       {
         path: '/news',
         name: 'news',
-        meta: { title: '消息管理', icon: '111' },
+        meta: { title: '消息管理', icon: 'fa-comments-o' },
         component: () => import('@/views/news/news.vue')
       },
       {
         path: '/manage-center',
         name: 'manageCenter',
-        meta: { title: '管理中心', icon: '111' },
+        meta: { title: '管理中心', icon: 'fa-cubes' },
         component: () => <RouterView key="manageCenter" />,
         redirect: '/manage-center/role',
         children: [
