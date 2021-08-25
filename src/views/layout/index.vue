@@ -1,6 +1,6 @@
 <template>
   <a-layout class="height-full">
-    <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible>
+    <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible width="240">
       <Aside/>
     </a-layout-sider>
     <a-layout>
@@ -17,7 +17,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 
-import Aside from './aside.vue';
+import Aside from './aside/aside.vue';
 import Header from './header.vue';
 import Main from './main.vue';
 

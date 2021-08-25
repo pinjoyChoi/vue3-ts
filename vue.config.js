@@ -11,7 +11,9 @@ module.exports={
   productionSourceMap:true,
   // webpack配置 config
   // configureWebpack:()=>{},
-  // chainWebpack:()=>{},
+  chainWebpack:(config)=>{
+    config.resolve.alias.set('vue-i18n', 'vue-i18n/dist/vue-i18n.cjs.js')
+  },
   // css相关配置
   css:{
       // css预设器配置项

@@ -4,7 +4,7 @@
     <div class="right">
       <a-dropdown :trigger="['click']">
         <a class="icon-box" @click.prevent>
-          <img src="../../../src/assets/images/avatar.jpg" alt="">
+          <img :src="avatar" alt="用户头像">
         </a>
         <template #overlay>
           <a-menu style="width: 150px">
@@ -43,25 +43,32 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, reactive, toRefs } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   name: 'Header',
   setup() {
     const { locale } = useI18n();
-    let langCurrent = ref('ch')
-    return {
+
+    const state = reactive({
       isCh: true,
       langs: [
         { value: 'ch' },
         { value: 'en' },
       ],
-      langCurrent,
-      changeLang(lang: string) {
-        locale.value = lang;
-        langCurrent.value = lang
-      }
+      langCurrent: ref('ch'),
+      avatar: require('@/assets/images/avatar.jpg')
+    });
+
+    const changeLang = (lang: string) => {
+      locale.value = lang;
+      state.langCurrent = lang
+    }
+
+    return {
+      ...toRefs(state),
+      changeLang,
     }
   }
 })

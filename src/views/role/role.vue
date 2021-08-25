@@ -1,12 +1,10 @@
 <template>
-  <div>
-    aside
-  </div>
+  <div>角色管理</div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
-  name: 'Aside'
+  name: 'Role'
 }
 </script>
 
