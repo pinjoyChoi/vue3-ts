@@ -33,10 +33,13 @@
 </template>
 
 <script lang="ts">
-import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
 import { ValidateErrorEntity } from 'ant-design-vue/es/form/interface';
 import { message } from 'ant-design-vue';
 import { defineComponent, reactive } from 'vue';
+
+import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
+import { LoginApi } from '@/api';
+
 interface FormState {
   user: string;
   password: string;
@@ -48,8 +51,8 @@ export default defineComponent({
       user: '',
       password: '',
     });
-    const handleFinish = (values: FormState) => {
-      console.log(values, formState);
+    const handleFinish = async (values: FormState) => {
+      const info = await LoginApi.getUserLogin(values)
       message.success('登录成功！');
     };
     const handleFinishFailed = (errors: ValidateErrorEntity<FormState>) => {
