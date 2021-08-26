@@ -38,9 +38,14 @@ module.exports={
             [`^${process.env.VUE_APP_FLAG}`]: '' //这里理解成代替target里面的地址,比如我要调用'http://40.00.100.100:3002/user/add'，直接写'/api/user/add'即可
           }
         },
-        // "/foo": {
-        //   target: "<other_url>"
-        // },
+        [process.env.VUE_APP_INFO]: {
+          target: process.env.VUE_APP_INFO,
+          ws: true,
+          changeOrigin: true,
+          pathRewrite: {
+            [`^${process.env.VUE_APP_INFO}`]: ''
+          }
+        },
       }
   },
   // 第三方得插件配置

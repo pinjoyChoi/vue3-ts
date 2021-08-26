@@ -3,10 +3,11 @@
 */
 
 import axios from 'axios'
+import { message } from 'ant-design-vue';
 
 // 创建一个 axios 实例
 const service = axios.create({
-  baseURL: process.env.VUE_APP_FLAG,
+  baseURL: '',
   timeout: 5000
 })
 
@@ -25,14 +26,14 @@ service.interceptors.response.use(
   response => {
     const res = response.data
     // 无 token
-    if (res.code === 403) {
-      // 跳转登录页
+    if (res.code !== 0) {
+      message.error(res.message);
+      return Promise.reject(res);
     } else {
       return res
     }
   },
   error => {
-    console.log(error)
     return Promise.reject(error)
   }
 )
