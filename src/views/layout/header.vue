@@ -1,6 +1,8 @@
 <template>
-  <div class="header height-full mlr-16 flex-between">
-    <div class="left"></div>
+  <div class="header height-full mr-16 flex-between">
+    <div class="left flex-center fs-20 pointer pl-16" @click="handleCollapsed">
+      <component :is="collapsed ? 'MenuUnfoldOutlined' : 'MenuFoldOutlined'" />
+    </div>
     <div class="right">
       <a-dropdown :trigger="['click']">
         <a class="icon-box" @click.prevent>
@@ -51,9 +53,21 @@
 import { defineComponent, ref, reactive, toRefs } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import {
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+} from '@ant-design/icons-vue';
+
 export default defineComponent({
   name: 'Header',
-  setup() {
+  components: { MenuFoldOutlined, MenuUnfoldOutlined },
+  emits: ['update:collapsed'],
+  props: {
+    collapsed: {
+      type: Boolean,
+    },
+  },
+  setup(props, context) {
     const { locale } = useI18n();
 
     const state = reactive({
@@ -63,7 +77,7 @@ export default defineComponent({
         { value: 'en' },
       ],
       langCurrent: ref('ch'),
-      avatar: require('@/assets/images/avatar.jpg')
+      avatar: require('@/assets/images/avatar.jpg'),
     });
 
     const changeLang = (lang: string) => {
@@ -71,9 +85,15 @@ export default defineComponent({
       state.langCurrent = lang
     }
 
+    // 向父组件emit菜单拓展、收缩事件
+    const handleCollapsed = () => {
+      context.emit('update:collapsed', !props.collapsed)
+    }
+
     return {
       ...toRefs(state),
       changeLang,
+      handleCollapsed,
     }
   }
 })

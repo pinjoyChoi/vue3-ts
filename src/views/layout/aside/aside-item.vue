@@ -1,8 +1,14 @@
 <template>
   <a-sub-menu>
     <template #title>
-      <i class="fa fa-fw fa-lg" :class="item.meta?.icon" />
-      {{ item.meta?.title }}
+      <div class="flex-vcenter">
+        <span class="anticon">
+          <i class="fa fa-fw" :class="item.meta?.icon" />
+        </span>
+        <span>
+          {{ item.meta?.title }}
+        </span>
+      </div>
     </template>
     <template v-if="item.children.length">
       <template v-for="childrenItem in item.children">
@@ -11,7 +17,7 @@
           <router-link :to="childrenItem.path">{{ childrenItem.meta?.title }}</router-link>
         </a-menu-item>
         <!-- 存在子路由 -->
-        <AsideItem v-else :key="childrenItem.path" />
+        <AsideItem v-else :key="childrenItem.path" :item="childrenItem" />
       </template>
     </template>
   </a-sub-menu>

@@ -1,7 +1,7 @@
 <template>
   <div class="aside">
     <div class="logo flex-center">
-      <img class="height-full" :src="logo" alt="logo">
+      <img class="height-full" :src="logo" alt="logo" v-if="!collapsed">
     </div>
     <a-menu
       mode="inline"
@@ -15,9 +15,11 @@
         <template v-if="!item.meta.hidden">
           <!-- 单级菜单 -->
           <a-menu-item v-if="!item.children" :key="item.path">
-            <router-link :to="item.path">
-              <i class="fa fa-fw fa-lg" :class="item.meta?.icon" />
-              {{ item.meta?.title }}
+            <router-link class="flex-vcenter" :to="item.path">
+              <span class="anticon">
+                <i class="fa fa-fw" :class="item.meta?.icon" />
+              </span>
+              <span>{{ item.meta?.title }}</span>
             </router-link>
           </a-menu-item>
           <!-- 多级菜单 -->
@@ -37,14 +39,20 @@ import AsideItem from './aside-item.vue';
 export default defineComponent({
   name: 'Aside',
   components: { AsideItem },
+  props: {
+    collapsed: {
+      type: Boolean,
+    }
+  },
   setup() {
     const { getRoutes } = useRouter();
     const routers = getRoutes().find(x => x.name === 'index')?.children;
 
+    const logo = require('@/assets/images/logo.jpg');
+
     const state = reactive({
       selectedKeys: JSON.parse(localStorage.getItem('selectedKeys') as string),
       openKeys: JSON.parse(localStorage.getItem('openKeys') as string),
-      logo: require('@/assets/images/logo.jpg')
     });
 
     const selectMenu = (params: { item: any, key: string, keyPath: string[] }) => {
@@ -61,6 +69,7 @@ export default defineComponent({
     return {
       ...toRefs(state),
       routers,
+      logo,
       selectMenu,
       openMenu,
     };

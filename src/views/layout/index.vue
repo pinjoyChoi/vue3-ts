@@ -1,21 +1,21 @@
 <template>
   <a-layout class="height-full">
-    <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible width="240">
-      <Aside/>
+    <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible width="220">
+      <Aside :collapsed="collapsed" />
     </a-layout-sider>
     <a-layout>
       <a-layout-header style="background: #fff; padding: 0">
-        <Header/>
+        <Header v-model:collapsed="collapsed" />
       </a-layout-header>
       <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }">
-        <Main/>
+        <Main />
       </a-layout-content>
     </a-layout>
   </a-layout>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, toRefs, reactive, ref } from 'vue';
 
 import Aside from './aside/aside.vue';
 import Header from './header.vue';
@@ -25,9 +25,15 @@ export default defineComponent({
   name: 'Layout',
   components: { Aside, Header, Main },
   setup() {
+    const state = reactive({
+      selectedKeys: [],
+    });
+
+    const collapsed = ref(false);
+
     return {
-      selectedKeys: ref<string[]>(['1']),
-      collapsed: ref<boolean>(false),
+      ...toRefs(state),
+      collapsed,
     };
   },
 })
