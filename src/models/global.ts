@@ -1,6 +1,6 @@
 export interface AxiosResponse<T> {
   code: number;
-  msg: string;
+  message: string;
   data: T;
   [key: string]: any;
 }

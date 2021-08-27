@@ -36,7 +36,11 @@
 import { ValidateErrorEntity } from 'ant-design-vue/es/form/interface';
 import { message } from 'ant-design-vue';
 import { defineComponent, reactive } from 'vue';
+// md5 加密 - 不可逆
+import md5 from 'js-md5';
+import Crypto from '@/utils/crypto';
 
+import Vrouter from '@/router'
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
 import { LoginApi } from '@/api';
 
@@ -51,9 +55,18 @@ export default defineComponent({
       user: '',
       password: '',
     });
-    const handleFinish = async (values: FormState) => {
-      const info = await LoginApi.getUserLogin(values)
-      message.success('登录成功！');
+    const handleFinish = () => {
+      const params = {
+        user: formState.user,
+        password: md5(formState.password),
+        password2: Crypto.Encrypt(formState.password),
+      }
+
+      // Vrouter.push('/')
+      // const data = await LoginApi.login();
+      // if(data) {
+      //   message.success('登录成功！');
+      // }
     };
     const handleFinishFailed = (errors: ValidateErrorEntity<FormState>) => {
       console.log(errors);
