@@ -1,5 +1,5 @@
 <template>
-  <a-sub-menu>
+  <a-sub-menu :key="item.path">
     <template #title>
       <div class="flex-vcenter">
         <span class="anticon">
@@ -12,12 +12,12 @@
     </template>
     <template v-if="item.children.length">
       <template v-for="childrenItem in item.children">
-        <!-- 不存在自己子路由 -->
+        <!-- 不存在子路由 -->
         <a-menu-item v-if="!childrenItem.children" :key="childrenItem.path">
-          <router-link :to="childrenItem.path">{{ childrenItem.meta?.title }}</router-link>
+          <router-link :to="{ name: childrenItem.name }">{{ childrenItem.meta?.title }}</router-link>
         </a-menu-item>
         <!-- 存在子路由 -->
-        <AsideItem v-else :key="childrenItem.path" :item="childrenItem" />
+        <AsideItem v-else :key="childrenItem?.path" :item="childrenItem" />
       </template>
     </template>
   </a-sub-menu>

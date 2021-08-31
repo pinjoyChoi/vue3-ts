@@ -12,10 +12,10 @@
       @openChange="openMenu"
     >
       <template v-for="item in routers">
-        <template v-if="!item.meta.hidden">
+        <template v-if="!item.meta?.hidden">
           <!-- 单级菜单 -->
           <a-menu-item v-if="!item.children" :key="item.path">
-            <router-link class="flex-vcenter" :to="item.path">
+            <router-link class="flex-vcenter" :to="{ name: item.name }">
               <span class="anticon">
                 <i class="fa fa-fw" :class="item.meta?.icon" />
               </span>
@@ -23,7 +23,7 @@
             </router-link>
           </a-menu-item>
           <!-- 多级菜单 -->
-          <AsideItem v-else :item="item" :key="item.path" />
+          <AsideItem v-else :item="item" :key="item?.path" />
         </template>
       </template>
     </a-menu>
@@ -51,8 +51,8 @@ export default defineComponent({
     const logo = require('@/assets/images/logo.jpg');
 
     const state = reactive({
-      selectedKeys: JSON.parse(localStorage.getItem('selectedKeys') as string),
-      openKeys: JSON.parse(localStorage.getItem('openKeys') as string),
+      selectedKeys: JSON.parse(localStorage.getItem('selectedKeys') as string) || [],
+      openKeys: JSON.parse(localStorage.getItem('openKeys') as string) || [],
     });
 
     const selectMenu = (params: { item: any, key: string, keyPath: string[] }) => {
