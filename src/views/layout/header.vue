@@ -37,9 +37,9 @@
             </a-menu-item>
             <a-menu-divider />
             <a-menu-item key="2">
-              <a href="">{{ $t('headers_menu.resetPassword') }}</a>
+              <span href="">{{ $t('headers_menu.resetPassword') }}</span>
             </a-menu-item>
-            <a-menu-item key="3">
+            <a-menu-item key="3" @click="logout">
               <span>{{ $t('headers_menu.logout') }}</span>
             </a-menu-item>
           </a-menu>
@@ -52,6 +52,8 @@
 <script lang="ts">
 import { defineComponent, ref, reactive, toRefs } from 'vue';
 import { useI18n } from 'vue-i18n';
+
+import { logout } from '@/utils/common'
 
 import {
   MenuFoldOutlined,
@@ -94,6 +96,7 @@ export default defineComponent({
       ...toRefs(state),
       changeLang,
       handleCollapsed,
+      logout,
     }
   }
 })

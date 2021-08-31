@@ -4,6 +4,7 @@
 
 import axios from 'axios'
 import { message } from 'ant-design-vue';
+import { getToken } from '@/utils/common'
 
 // 创建一个 axios 实例
 const service = axios.create({
@@ -14,7 +15,10 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(
   config => {
-    return config
+    if (getToken()) {
+      config.headers['_token_'] = getToken();
+    }
+    return config;
   },
   error => {
     return Promise.reject(error)
@@ -25,9 +29,8 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     const res = response.data
-    // 无 token
-    if (res.code !== 0) {
-      message.error(res.message);
+    if (res?.code !== 200) {
+      message.error(res.data.msg);
       return Promise.reject(res);
     } else {
       return res

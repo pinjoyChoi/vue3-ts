@@ -6,7 +6,6 @@
         layout="inline"
         :model="formState"
         @finish="handleFinish"
-        @finishFailed="handleFinishFailed"
       >
         <a-form-item class="pb-20" label="账号">
           <a-input v-model:value="formState.user" placeholder="Username">
@@ -32,55 +31,5 @@
   </div>
 </template>
 
-<script lang="ts">
-import { ValidateErrorEntity } from 'ant-design-vue/es/form/interface';
-import { message } from 'ant-design-vue';
-import { defineComponent, reactive } from 'vue';
-// md5 加密 - 不可逆
-import md5 from 'js-md5';
-import Crypto from '@/utils/crypto';
-
-import Vrouter from '@/router'
-import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
-import { LoginApi } from '@/api';
-
-interface FormState {
-  user: string;
-  password: string;
-}
-export default defineComponent({
-  name: 'Login',
-  setup() {
-    const formState = reactive<FormState>({
-      user: '',
-      password: '',
-    });
-    const handleFinish = () => {
-      const params = {
-        user: formState.user,
-        password: md5(formState.password),
-        password2: Crypto.Encrypt(formState.password),
-      }
-
-      // Vrouter.push('/')
-      // const data = await LoginApi.login();
-      // if(data) {
-      //   message.success('登录成功！');
-      // }
-    };
-    const handleFinishFailed = (errors: ValidateErrorEntity<FormState>) => {
-      console.log(errors);
-    };
-    return {
-      formState,
-      handleFinish,
-      handleFinishFailed,
-    };
-  },
-  components: {
-    UserOutlined,
-    LockOutlined,
-  },
-})
-</script>
+<script lang="ts" src="./login.ts"></script>
 <style lang="scss" src="./login.scss" scoped />

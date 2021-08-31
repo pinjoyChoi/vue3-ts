@@ -9,6 +9,8 @@ import 'ant-design-vue/dist/antd.css';
 import i18n  from './language/i18n';
 // font-awesome 
 import 'font-awesome/css/font-awesome.min.css';
+// 添加 mock数据
+import './mock';
 
 createApp(App)
   .use(store)

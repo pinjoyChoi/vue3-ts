@@ -1,3 +1,3 @@
 export interface LoginModel {
-  accessToken: string
+  token: string
 }
