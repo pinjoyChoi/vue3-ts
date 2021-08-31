@@ -10,7 +10,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'index',
-    meta: { title: 'index' },
+    meta: { title: 'vue3-ts' },
     component: () => import('@/views/layout/index.vue'),
     redirect: 'overview',
     children: [
@@ -31,7 +31,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'manageCenter',
         meta: { title: '管理中心', icon: 'fa-cubes' },
         component: () => <RouterView key="manageCenter" />,
-        redirect: '/manage-center/role',
+        redirect: 'role',
         children: [
           {
             path: 'role',
