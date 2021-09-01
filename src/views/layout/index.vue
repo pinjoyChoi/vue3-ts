@@ -48,5 +48,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-
+.ant-layout-content {
+  overflow: auto;
+}
 </style>

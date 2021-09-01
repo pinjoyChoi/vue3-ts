@@ -47,6 +47,21 @@ const routes: Array<RouteRecordRaw> = [
           },
         ]
       },
+      {
+        path: 'components',
+        name: 'components',
+        meta: { title: '组件', icon: 'fa-cubes' },
+        component: () => <RouterView key="components" />,
+        redirect: 'echarts',
+        children: [
+          {
+            path: 'echarts',
+            name: 'echarts',
+            meta: { title: 'echarts' },
+            component: () => import('@/views/role/role.vue'),
+          },
+        ]
+      },
     ]
   },
 ]
